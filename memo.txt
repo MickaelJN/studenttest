@@ -1,0 +1,56 @@
+Installation symfony
+symfony new __my_project_directory__ --version="6.3.*"
+
+demarrage serveur local
+symfony server:start
+
+Installation profiler
+composer require --dev symfony/profiler-pack
+
+Installation API platform
+symfony composer require api
+
+Ajouter fichier api platform et faire
+composer install
+
+Create database
+php bin/console doctrine:database:create
+
+Installation Make
+composer require --dev symfony/maker-bundle
+
+Migration
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
+
+Installation php unit
+symfony composer req phpunit --dev
+
+Lancer phpunit
+vendor/bin/phpunit
+
+Générer une classe de test unitaire
+symfony console make:test TestCase _nom_classe_
+
+rapport couverture
+vendor/bin/phpunit --coverage-html public/test-coverage
+ou
+php -d xdebug.mode=coverage vendor/bin/phpunit --coverage-html public/test-coverage
+
+Pour les tests functionnels api platform
+composer require --dev symfony/browser-kit symfony/http-client
+composer require --dev justinrainbow/json-schema
+
+Base de test
+symfony console doctrine:database:create --env=test
+symfony console doctrine:migrations:migrate -n --env=test
+
+Fixtures
+symfony composer req orm-fixtures --dev
+
+charger données de test
+symfony console doctrine:fixtures:load --env=test
+
+cacher les depreciation symfony dans les tests
+<env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
+
